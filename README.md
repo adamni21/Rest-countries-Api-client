@@ -25,7 +25,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshots/Screenshot Header.png) ![](./screenshots/Screenshot Header dark.png) 
+![](https://github.com/adamni21/Rest-countries-Api-client/blob/main/screenshots/Screenshot%20Header.png) ![](https://github.com/adamni21/Rest-countries-Api-client/blob/main/screenshots/Screenshot%20Header%20dark.png) 
 
 ## My process
 
