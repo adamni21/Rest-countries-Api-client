@@ -1,0 +1,32 @@
+
+.header {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    width: 100%;
+    padding: 0 2rem;
+    background: var(--accent-background);
+    color: var(--text);
+    box-shadow: 0 .2rem .5rem #0002;
+}
+
+.switch {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    padding: .5rem;
+    background-color: var(--accent-background);
+    color: var(--text);
+    box-shadow: -.1rem .1rem .3rem .1rem var(--accent-background-darker);
+    border-radius: .3rem;
+
+    &:hover {
+        background: var(--accent-background-brighter);
+        box-shadow: 0 0 1rem .2rem var(--accent-background-brighter);
+    }
+}
+
+.icon {
+    margin: 0 .4rem;
+}
