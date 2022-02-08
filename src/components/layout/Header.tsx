@@ -20,13 +20,13 @@ const Header: FC<Props> = (props) => {
         switchedInner={
           <>
             <FontAwesomeIcon className={c.icon} icon={faLightbulb} />
-            &nbsp;Bright Mode{" "}
+            Bright Mode{" "}
           </>
         }
         isSwitched={props.theme === "dark"}
       >
         <FontAwesomeIcon className={c.icon} icon={faMoon} />
-        &nbsp;Dark Mode
+        Dark Mode
       </SwitchButton>
     </header>
   );
