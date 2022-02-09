@@ -2,7 +2,14 @@
 .App {
   text-align: center;
   position: relative;
-  min-height:100vh;
+  height: 100vh;
   background-color: var(--background);
   width: 100%;
+}
+
+.flex {
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

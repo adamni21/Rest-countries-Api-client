@@ -25,7 +25,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](https://github.com/adamni21/Rest-countries-Api-client/blob/main/screenshots/Screenshot%20Header.png) ![](https://github.com/adamni21/Rest-countries-Api-client/blob/main/screenshots/Screenshot%20Header%20dark.png) 
+![](https://github.com/adamni21/Rest-countries-Api-client/blob/main/screenshots/Screenshot.png) ![](https://github.com/adamni21/Rest-countries-Api-client/blob/main/screenshots/Screenshot%20dark.png) 
 
 ## My process
 

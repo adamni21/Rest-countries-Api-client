@@ -1,19 +1,19 @@
 export interface Country {
   name: string;
-  nativeNames: [string];
-  capital: [string];
+  nativeNames?: [string];
+  capitals?: [string];
   languages: [string];
   currencies: [string];
   region: string;
-  subRegion: string;
+  subRegion?: string;
   population: number;
   borders: [string];
-  topLevelDomain: [string];
-  flagDomain: string;
+  topLevelDomains: [string];
+  flagUrl: string;
   cca3: string;
 }
 
 export type CountriesContextState = {
-  countries: [Country?],
+  countries: Country[],
   setCountries: (countries: [Country]) => void
 }

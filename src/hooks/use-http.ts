@@ -25,8 +25,8 @@ const useHttp = <T>(URL: string, dataReducer?: (rawData: any) => T) => {
     }
     
     const data = dataReducer
-      ? dataReducer((await response.json())[0])
-      : (await response.json())[0];
+      ? dataReducer((await response.json()))
+      : (await response.json());
     setData(data);
     setIsLoading(false);
   };

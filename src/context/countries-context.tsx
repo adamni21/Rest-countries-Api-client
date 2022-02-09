@@ -6,10 +6,10 @@ const countriesContextDefault: CountriesContextState = {
   setCountries: () => {},
 };
 
-const CountriesContext = createContext(countriesContextDefault);
+export const CountriesContext = createContext(countriesContextDefault);
 
 const CountriesProvider: FC = ({ children }) => {
-  const [countries, setCountries] = useState<[Country?]>([]);
+  const [countries, setCountries] = useState<Country[]>([]);
   return (
     <CountriesContext.Provider
       value={{ countries: countries, setCountries: setCountries }}

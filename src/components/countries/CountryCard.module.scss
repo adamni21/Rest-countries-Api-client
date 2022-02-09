@@ -1,0 +1,25 @@
+.country-card {
+    background-color: var(--background-brighter);
+    max-width: 20%;
+    border-radius: .4rem;
+    overflow: clip;
+    box-shadow: 0 .3rem .5rem var(--shadow);
+
+    & img {
+        width: 100%
+    }
+}
+
+.info {
+    padding: 0 1.5rem .5rem;
+    text-align: left;
+    color: var(--text);
+
+    & h2 {
+        font-weight: 600;
+    }
+
+    & span {
+        font-weight: 600;
+    }
+}
