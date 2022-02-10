@@ -2,7 +2,9 @@
 .App {
   text-align: center;
   position: relative;
-  height: 100vh;
+  padding: 0 0 4rem;
+  min-height: 100vh;
+  box-sizing: border-box;
   background-color: var(--background);
   width: 100%;
 }
