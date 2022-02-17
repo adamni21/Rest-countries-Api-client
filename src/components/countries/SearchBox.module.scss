@@ -1,0 +1,28 @@
+.box {
+    color: var(--text);
+    background: var(--background-brighter);
+    display: inline-flex;
+    justify-content: flex-start;
+    font-size: larger;
+    border: none;
+    border-radius: 5px;
+    padding: 1em 1em;
+    width: 20rem;
+    margin: 3rem 0;
+    box-shadow: 0 .1rem .5rem #0003;
+
+    & span {
+        margin: 0 .5rem;
+    }
+}
+
+.input {
+    font-size: inherit;
+    color: var(--text);
+    background: var(--background-brighter);
+    border: none;
+
+    &:focus {
+        outline: none;
+    }
+}
