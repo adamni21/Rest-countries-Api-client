@@ -32,9 +32,11 @@ $secondaryD: #4E3B21;
 :root {
   --background: #{$background};
   --background-brighter: #{color.scale($background, $lightness: 8%)};
+  --background-darker: #{color.scale($background, $lightness: -8%)};
   --accent-background: #{$accent-background};
   --accent-background-brighter: #{color.scale($accent-background, $lightness: 14%)};
   --text: #{$text};
+  --text-brighter: #{color.scale($text, $lightness: 6%)};
   --inverse-text: #{$inverse-text};
   --primary: #{$primary};
   --secondary: #{$secondary};
@@ -43,10 +45,12 @@ $secondaryD: #4E3B21;
 
 [data-theme="dark"] {
   --background: #{$backgroundD};
-  --background-brighter: #{color.scale($backgroundD, $lightness: 6%)};
+  --background-brighter: #{color.scale($backgroundD, $lightness: 3%)};
+  --background-darker: #{color.scale($backgroundD, $lightness: -3%)};
   --accent-background: #{$accent-backgroundD};
   --accent-background-brighter: #{color.scale($accent-backgroundD, $lightness: 6%)};
   --text: #{$textD};
+  --text-brighter: #{color.scale($textD, $lightness: 10%)};
   --inverse-text: #{$inverse-textD};
   --primary: #{$primaryD};
   --secondary: #{$secondaryD};

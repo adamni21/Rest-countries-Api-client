@@ -64,6 +64,16 @@ const CountryGrid: FC<Props> = (props) => {
   // ) : error ? (
   //   <h2>something went wrong.</h2>
   // ) : (
+  //   ctx.countries.map((country) => (
+  //     <CountryCard
+  //       key={country.name}
+  //       name={country.name}
+  //       capital={country.capitals?.[0]}
+  //       population={country.population}
+  //       region={country.region}
+  //       flagUrl={country.flagUrl}
+  //     />
+  //   ))
   // );
 
   /* ###DELETE### */
