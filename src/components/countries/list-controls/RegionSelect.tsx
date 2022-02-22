@@ -9,6 +9,7 @@ interface Props {
   value: string;
   defaultValue?: string;
   placeholder?: string;
+  className?: string;
   onChange: (value: string) => any;
 }
 
@@ -16,8 +17,8 @@ const RegionSelect: FC<Props> = ({
   children,
   onChange,
   placeholder,
-  defaultValue,
   value,
+  className
 }) => {
   console.log(value);
 
@@ -32,9 +33,10 @@ const RegionSelect: FC<Props> = ({
   }, []);
   const selectHandler: MouseEventHandler = (e) => {
     if (e.target instanceof HTMLOptionElement) {
-      
       if (onChange)
-        onChange(e.target.hasAttribute("value") ? e.target.value : e.target.innerText);
+        onChange(
+          e.target.hasAttribute("value") ? e.target.value : e.target.innerText
+        );
       setShowOptions(false);
     }
   };
@@ -47,14 +49,12 @@ const RegionSelect: FC<Props> = ({
     </ul>
   );
   return (
-    <div ref={selectRef} className={c.dropdown}>
+    <div ref={selectRef} className={`${c.dropdown} ${className}`}>
       <div className={c.header} onClick={() => setShowOptions(!showOptions)}>
         <div className={c["value-container"]}>
-          <p>
-            {value ? value : defaultValue ? defaultValue : placeholder}
-          </p>
+          <div>{value === "" ? placeholder : value }</div>
         </div>
-        <button className={`${c.button} ${showOptions && c.active}`}>
+        <button className={`${c.button} ${showOptions ? c.active : ""}`}>
           <FontAwesomeIcon icon={faChevronDown} />
         </button>
       </div>

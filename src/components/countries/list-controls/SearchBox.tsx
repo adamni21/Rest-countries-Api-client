@@ -6,13 +6,14 @@ import c from "./SearchBox.module.scss";
 
 interface Props {
   onChange: (event: FormEvent<HTMLInputElement>) => void;
+  className?: string;
   value: string;
 }
 
-const CountrySearchBox: FC<Props> = (props) => {
+const SearchBox: FC<Props> = (props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <div className={c.box} onClick={() => {inputRef.current?.focus()}}>
+    <div className={`${c.box} ${props.className}`} onClick={() => {inputRef.current?.focus()}} >
       <span>
         <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
       </span>
@@ -21,4 +22,4 @@ const CountrySearchBox: FC<Props> = (props) => {
   );
 };
 
-export default CountrySearchBox;
+export default SearchBox;
