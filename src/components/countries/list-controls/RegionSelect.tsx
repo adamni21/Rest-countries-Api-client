@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import c from "./RegionSelect.module.scss";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { Region } from "../../../context/types";
 
 interface Props {
   value: string;
@@ -18,10 +19,8 @@ const RegionSelect: FC<Props> = ({
   onChange,
   placeholder,
   value,
-  className
+  className,
 }) => {
-  console.log(value);
-
   const [showOptions, setShowOptions] = useState(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
   const handleOutsideClick = (e: MouseEvent) => {
@@ -52,7 +51,7 @@ const RegionSelect: FC<Props> = ({
     <div ref={selectRef} className={`${c.dropdown} ${className}`}>
       <div className={c.header} onClick={() => setShowOptions(!showOptions)}>
         <div className={c["value-container"]}>
-          <div>{value === "" ? placeholder : value }</div>
+          <div>{value === Region.all ? placeholder : value}</div>
         </div>
         <button className={`${c.button} ${showOptions ? c.active : ""}`}>
           <FontAwesomeIcon icon={faChevronDown} />

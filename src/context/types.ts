@@ -13,7 +13,18 @@ export interface Country {
   cca3: string;
 }
 
-export type CountriesContextState = {
-  countries: Country[],
-  setCountries: (countries: [Country]) => void
+export enum Region {
+  America = "America",
+  Europe = "Europe",
+  Africa = "Africa",
+  Asia = "Asia",
+  Oceania = "Oceania",
+  all = "all",
 }
+
+export type CountriesContextState = {
+  countries: Country[];
+  filteredCountries: Country[];
+  filterCountries: (query: string, region: Region) => void;
+  setCountries: (countries: [Country]) => void;
+};

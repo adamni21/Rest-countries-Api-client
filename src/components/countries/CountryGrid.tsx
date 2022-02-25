@@ -77,7 +77,7 @@ const CountryGrid: FC<Props> = (props) => {
   // );
 
   /* ###DELETE### */
-  const content = ctx.countries.map((country) => (
+  const content = ctx.filteredCountries.map((country) => (
     <CountryCard
       key={country.name}
       name={country.name}
