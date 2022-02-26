@@ -11,6 +11,10 @@ interface Props {
   defaultValue?: string;
   placeholder?: string;
   className?: string;
+  // for custom coloring
+  headerClass?: string;
+  dropdownClass?: string;
+
   onChange: (value: string) => any;
 }
 
@@ -20,6 +24,8 @@ const RegionSelect: FC<Props> = ({
   placeholder,
   value,
   className,
+  headerClass,
+  dropdownClass,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
@@ -41,7 +47,9 @@ const RegionSelect: FC<Props> = ({
   };
   const options = (
     <ul
-      className={`${c.options} ${showOptions && c.active}`}
+      className={`${c.options} ${showOptions ? c.active : ""} ${
+        dropdownClass ? dropdownClass : ""
+      }`}
       onClick={selectHandler}
     >
       {children}
@@ -49,7 +57,10 @@ const RegionSelect: FC<Props> = ({
   );
   return (
     <div ref={selectRef} className={`${c.dropdown} ${className}`}>
-      <div className={c.header} onClick={() => setShowOptions(!showOptions)}>
+      <div
+        className={`${c.header} ${headerClass ? headerClass : ""}`}
+        onClick={() => setShowOptions(!showOptions)}
+      >
         <div className={c["value-container"]}>
           <div>{value === Region.all ? placeholder : value}</div>
         </div>
