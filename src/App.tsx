@@ -16,9 +16,7 @@ function App() {
     <div className={c.App} data-theme={theme}>
       <Header onSwitch={toggleThemeHandler} theme={theme}></Header>
       <ListControls />
-      {console.time("render")}
       <CountryGrid />
-      {console.timeEnd("render")}
     </div>
   );
 }

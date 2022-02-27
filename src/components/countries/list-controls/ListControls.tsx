@@ -1,4 +1,4 @@
-import { FC, FormEvent, useContext, useEffect, useState } from "react";
+import { FC, FormEvent, useContext, useState } from "react";
 import RegionSelect from "./RegionSelect";
 import SearchBox from "./SearchBox";
 
@@ -9,31 +9,25 @@ import { Region } from "../../../context/types";
 interface Props {}
 
 const ListControls: FC<Props> = (props) => {
-  const [query, setQuery] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [region, setRegion] = useState<Region>(Region.all);
   const ctx = useContext(CountriesContext);
-  useEffect(() => {
-    const queryCountries = setTimeout(() => {
-      ctx.filterCountries(query, region);
-    }, 400);
-    return () => {
-      clearTimeout(queryCountries);
-    };
-  }, [query, region, ctx.countries]);
-  const queryChangeHandler = (e: FormEvent<HTMLInputElement>) => {
-    setQuery(e.currentTarget.value);
+  const searchValueChangeHandler = (e: FormEvent<HTMLInputElement>) => {
+    setSearchValue(e.currentTarget.value);
+    ctx.setSearchValue(e.currentTarget.value);
   };
   const regionChangeHandler = (value: string) => {
-    if (Object.values(Region).includes(value as Region))
+    if (Object.values(Region).includes(value as Region)) {
       setRegion(value as Region);
-    else throw new TypeError(`value "${value}" is'nt of type Region`);
+      ctx.setRegion(value as Region);
+    } else throw new TypeError(`value "${value}" is'nt of type Region`);
   };
   return (
     <div className={c.controls}>
       <SearchBox
         className={c.search}
-        onChange={queryChangeHandler}
-        value={query}
+        onChange={searchValueChangeHandler}
+        value={searchValue}
       />
       <RegionSelect
         className={c.select}

@@ -24,7 +24,10 @@ export enum Region {
 
 export type CountriesContextState = {
   countries: Country[];
-  filteredCountries: Country[];
-  filterCountries: (query: string, region: Region) => void;
   setCountries: (countries: [Country]) => void;
+  filteredCountries: Country[];
+  searchValue: string,
+  setSearchValue: (searchValue: string) => void,
+  region: Region,
+  setRegion: (region: Region) => void,
 };
