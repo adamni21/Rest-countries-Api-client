@@ -19,7 +19,12 @@ const CountryCard: FC<Props> = ({
 }) => {
   return (
     <div className={c["country-card"]}>
-      <img src={flagUrl} alt={`flag of ${name}`} />
+      <div
+        className={c.flagContainer}
+      >
+        <img className={c.background} src={flagUrl} alt="" />
+        <img className={c.flag} src={flagUrl} alt={`flag of ${name}`} />
+      </div>
       <div className={c.info}>
         <h2>{name}</h2>
         <p>

@@ -3,12 +3,34 @@
     border-radius: .4rem;
     overflow: clip;
     box-shadow: 0 .3rem .5rem var(--shadow);
-    & img {
-        object-fit: fill;
-        aspect-ratio: calc(165/100);
-        width: 100%;
-    }
 
+    & .flagContainer {
+        aspect-ratio: 1.65;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+
+        & .background {
+            margin: -2% 0 0 -2%;
+            height: 104%;
+            width: 104%;
+            object-fit: cover;
+            filter: saturate(.85) blur(3px);
+        }
+
+        & .flag {
+            vertical-align: bottom;
+            margin: -.5% 0 0 -.5%;
+            height: 101%;
+            width: 101%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+        }
+
+    }
 }
 
 
