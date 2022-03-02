@@ -2,8 +2,7 @@ import { useState } from "react";
 
 import c from "./App.module.scss";
 import Header from "./components/layout/Header";
-import CountryGrid from "./components/countries/CountryGrid";
-import ListControls from "./components/countries/list-controls/ListControls";
+import Home from "./components/pages/Home";
 
 function App() {
   const [theme, setTheme] = useState("");
@@ -15,8 +14,7 @@ function App() {
   return (
     <div className={c.App} data-theme={theme}>
       <Header onSwitch={toggleThemeHandler} theme={theme}></Header>
-      <ListControls />
-      <CountryGrid />
+      <Home />
     </div>
   );
 }

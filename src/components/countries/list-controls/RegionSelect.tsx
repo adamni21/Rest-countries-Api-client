@@ -13,7 +13,7 @@ interface Props {
   className?: string;
   // for custom coloring
   headerClass?: string;
-  dropdownClass?: string;
+  optionsBoxClass?: string;
 
   onChange: (value: string) => any;
 }
@@ -23,9 +23,11 @@ const RegionSelect: FC<Props> = ({
   onChange,
   placeholder,
   value,
+  //for dimensions
   className,
+  //for custom coloring
   headerClass,
-  dropdownClass,
+  optionsBoxClass,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
@@ -48,7 +50,7 @@ const RegionSelect: FC<Props> = ({
   const options = (
     <ul
       className={`${c.options} ${showOptions ? c.active : ""} ${
-        dropdownClass ? dropdownClass : ""
+        optionsBoxClass ? optionsBoxClass : ""
       }`}
       onClick={selectHandler}
     >
