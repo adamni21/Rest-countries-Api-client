@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect } from "react";
-import { CountriesContext } from "../../context/countries-context";
+import { CountriesContext } from "../../../../context/countries-context";
 // import { Country } from "../../context/types";
 // import useHttp from "../../hooks/use-http";
 import CountryCard from "./CountryCard";

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import c from "./RegionSelect.module.scss";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { Region } from "../../../context/types";
+import { Region } from "../../../../context/types";
 
 interface Props {
   value: string;

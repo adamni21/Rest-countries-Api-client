@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC } from "react";
-import SwitchButton from "../UI/SwitchButton";
+import ToggleButton from "../UI/ToggleButton";
 import { faMoon, faLightbulb } from "@fortawesome/free-regular-svg-icons";
 
 import c from "./Header.module.scss";
@@ -14,7 +14,7 @@ const Header: FC<Props> = (props) => {
   return (
     <header className={c.header}>
       <h1>Where in the World?</h1>
-      <SwitchButton
+      <ToggleButton
         onClick={props.onSwitch}
         className={c.switch}
         switchedInner={
@@ -27,7 +27,7 @@ const Header: FC<Props> = (props) => {
       >
         <FontAwesomeIcon className={c.icon} icon={faMoon} />
         Dark Mode
-      </SwitchButton>
+      </ToggleButton>
     </header>
   );
 };

@@ -3,8 +3,8 @@ import RegionSelect from "./RegionSelect";
 import SearchBox from "./SearchBox";
 
 import c from "./ListControls.module.scss";
-import { CountriesContext } from "../../../context/countries-context";
-import { Region } from "../../../context/types";
+import { CountriesContext } from "../../../../context/countries-context";
+import { Region } from "../../../../context/types";
 
 interface Props {}
 

@@ -1,6 +1,6 @@
 import { FC } from "react";
-import CountryGrid from "../countries/CountryGrid";
-import ListControls from "../countries/list-controls/ListControls";
+import CountryGrid from "./components/countries/CountryGrid";
+import ListControls from "./components/list-controls/ListControls";
 
 import c from "./Home.module.scss"
 

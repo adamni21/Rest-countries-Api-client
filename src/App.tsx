@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import c from "./App.module.scss";
 import Header from "./components/layout/Header";
-import Home from "./components/pages/Home";
+import CountryPage from "./pages/Country/CountryPage";
+import Home from "./pages/Home/Home";
 
 function App() {
   const [theme, setTheme] = useState("");
@@ -14,7 +15,7 @@ function App() {
   return (
     <div className={c.App} data-theme={theme}>
       <Header onSwitch={toggleThemeHandler} theme={theme}></Header>
-      <Home />
+      <CountryPage/>
     </div>
   );
 }

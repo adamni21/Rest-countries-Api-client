@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react";
 
-import c from "./SwitchButton.module.scss"
+import c from "./Button.module.scss"
 
 
 interface Props {
@@ -11,12 +11,12 @@ interface Props {
 }
 
 
-const SwitchModeButton: FC<Props> = props => {
+const ToggleButton: FC<Props> = props => {
     const btnInner = props.isSwitched ? props.switchedInner : props.children
   return (
-        <button onClick={props.onClick}className={`${c["switch-button"]} ${props.className}`}>{btnInner}</button>
+        <button onClick={props.onClick}className={`${c.button} ${props.className}`}>{btnInner}</button>
   );
 };
 
 
-export default SwitchModeButton;
+export default ToggleButton;
