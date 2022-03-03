@@ -1,0 +1,14 @@
+.flagContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20rem;
+    border: 5px;
+}
+
+.flag {
+    box-shadow: 0 .1rem .5rem var(--shadow);
+    max-width: 90%;
+    max-height: 90%;
+}
