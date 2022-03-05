@@ -1,0 +1,33 @@
+.infoGrid {
+    min-width: 20rem;
+    flex: 1;
+    text-align: left;
+    color: var(--text);
+
+    display: grid;
+    justify-items: start;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        "name name"
+        "info1 info2"
+        "border border";
+}
+
+.countryName {
+    grid-area: name;
+    margin: 0;
+    padding-left: .5rem;
+    padding-bottom: 1rem;
+
+}
+
+.info1 {
+    grid-area: "info1";
+
+    &>div {
+        display: flex;
+        align-items: center;
+        padding: .3rem .5rem;
+
+    }
+}
