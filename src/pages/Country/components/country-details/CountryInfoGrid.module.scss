@@ -23,11 +23,8 @@
 
 .info1 {
     grid-area: "info1";
+}
 
-    &>div {
-        display: flex;
-        align-items: center;
-        padding: .3rem .5rem;
-
-    }
+.info2 {
+    grid-area: "info2";
 }

@@ -2,3 +2,10 @@
     font-weight: 600;
     margin-right: .3em;
 }
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    padding: .3rem .5rem;
+    white-space: nowrap;
+}

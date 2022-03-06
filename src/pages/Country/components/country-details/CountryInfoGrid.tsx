@@ -9,13 +9,13 @@ interface Props {
   region: string;
   subRegion?: string;
   capitals: string[];
-  topLevelDomains?: [string];
-  currencies?: [string];
-  languages?: [string];
+  topLevelDomains: [string];
+  currencies: [string];
+  languages: [string];
   borders?: [string];
 }
 
-const CountryInfo: FC<Props> = (props) => {
+const CountryInfoGrid: FC<Props> = (props) => {
   return (
     <div className={c.infoGrid}>
       <h1 className={c.countryName}>{props.name}</h1>
@@ -26,15 +26,23 @@ const CountryInfo: FC<Props> = (props) => {
           value={props.population?.toLocaleString("en-US")}
         />
         <GridInfoRow label="Region" value={props.region} />
-        <GridInfoRow
-          label="Sub Region"
-          value={props.subRegion ? props.subRegion : "Has No Sub Region"}
-        />
+        <GridInfoRow label="Sub Region" value={props.subRegion} />
         <GridInfoRow label="Capital" value={props.capitals[0]} />
+      </div>
+      <div className={c.info2}>
+        <GridInfoRow
+          label="Top Level Domain"
+          value={props.topLevelDomains[0]}
+        />
+        <GridInfoRow label="Native Name" value={props.nativeNames[0]} />
+        <GridInfoRow
+          label="Languages"
+          value={Object.values(props.languages)[0]}
+        />
         <div className="infos"></div>
       </div>
     </div>
   );
 };
 
-export default CountryInfo;
+export default CountryInfoGrid;

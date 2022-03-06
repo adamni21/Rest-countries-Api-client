@@ -3,7 +3,7 @@ import c from "./GridInfoRow.module.scss";
 
 interface Props {
   label: string;
-  value: string;
+  value: string | undefined;
   hasOther?: [string];
 }
 
@@ -12,9 +12,14 @@ const GridInfoRow: FC<Props> = (props) => {
     <span className={c.tooltip}>, and other</span>
   );
   return (
-    <div>
-      <label className={c.label}>{`${props.label}${hasOther ? 's': ''}: `}</label>
-      <p>{props.value}{hasOther}</p>
+    <div className={c.wrapper}>
+      <label className={c.label}>
+        {`${props.label}${hasOther ? "s" : ""}: `}
+      </label>
+      <p>
+        {props.value ? props.value : "has no " + props.label}
+        {hasOther}
+      </p>
     </div>
   );
 };
