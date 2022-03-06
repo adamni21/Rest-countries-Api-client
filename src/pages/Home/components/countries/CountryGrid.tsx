@@ -8,6 +8,11 @@ import c from "./CountryGrid.module.scss";
 
 interface Props {}
 
+/* TODO: 
+  1) reduce languages from object to array;  
+  2) fetch svgUrl additionally 
+  */
+
 // const dataReducer = (raw: any): [Country] => {
 //   return raw.map((country: any): Country => {
 //     const nativeNames = country.name.nativeName
@@ -32,6 +37,8 @@ interface Props {}
 //   });
 // };
 
+/* /TODO */
+
 const CountryGrid: FC<Props> = (props) => {
   // using local storage during developement
   // const {
@@ -47,7 +54,7 @@ const CountryGrid: FC<Props> = (props) => {
   /* ###DELETE### */
   useEffect(() => {
     ctx.setCountries(JSON.parse(localStorage.getItem("countries")!));
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   /* ###/DELETE### */
   // using local storage during developement
