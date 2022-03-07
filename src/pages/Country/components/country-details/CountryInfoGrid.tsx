@@ -36,8 +36,9 @@ const CountryInfoGrid: FC<Props> = (props) => {
         />
         <GridInfoRow label="Native Name" value={props.nativeNames[0]} />
         <GridInfoRow
-          label="Languages"
+          label="Language"
           value={Object.values(props.languages)[0]}
+          hasOther={Object.values(props.languages).slice(1) }
         />
         <div className="infos"></div>
       </div>
