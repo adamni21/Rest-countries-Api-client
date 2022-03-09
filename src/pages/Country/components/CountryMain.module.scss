@@ -1,9 +1,10 @@
 .flexMain {
-    margin-top: 3rem;
+    padding: 3rem;
     box-sizing: border-box;
     width: 100%;
-    align-items: center;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 2rem;
 }

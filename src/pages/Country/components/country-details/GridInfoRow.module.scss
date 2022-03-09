@@ -1,17 +1,24 @@
-.label {
-    font-weight: 600;
-    margin-right: .3em;
-}
-
 .wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
     padding: .3rem .5rem;
-    white-space: nowrap;
 }
+.label {
+    font-weight: 600;
+    margin-right: -.7em;
+}
+
+.value {
+    white-space: nowrap;
+    margin-left: 1em;
+}
+
+
 
 .tooltip {
     position: relative;
+
 
     &::before {
         content: attr(data-other);
@@ -20,15 +27,13 @@
         display: none;
         padding: .5em;
         margin-bottom: .3em;
-        width: fit-content;
         height: fit-content;
         position: absolute;
         bottom: 100%;
-        max-width: 200%;
-        white-space: pre-line;
+        width: 250%;
         text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
+        right: -.3rem;
+        white-space: normal;
     }
     
     &::after {

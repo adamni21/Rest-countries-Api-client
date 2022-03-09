@@ -8,7 +8,7 @@ interface Props {}
 
 const CountryMain: FC<Props> = (props) => {
   const ctx = useContext(CountriesContext);
-  const country = ctx.countries.find((country) => country.name === "Malta"); // gonna come from urlParams
+  const country = ctx.countries.find((country) => country.name === "United States"); // gonna come from urlParams
 
   useEffect(() => {
     ctx.setCountries(JSON.parse(localStorage.getItem("countries")!));
@@ -22,7 +22,7 @@ const CountryMain: FC<Props> = (props) => {
     <div className={c.flexMain}>
       {country && (
         <>
-          {/* <CountryFlag flagUrl={svgUrl} countryName={country.name} /> */}
+          <CountryFlag flagUrl={svgUrl} countryName={country.name} />
           <CountryInfoGrid
             name={country.name}
             nativeNames={country.nativeNames}

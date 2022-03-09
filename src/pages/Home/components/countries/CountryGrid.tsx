@@ -9,7 +9,7 @@ import c from "./CountryGrid.module.scss";
 interface Props {}
 
 /* TODO: 
-  1) reduce languages from object to array;  
+  1) reduce "languages" and "currencies" from object to array;  
   2) fetch svgUrl additionally 
   */
 

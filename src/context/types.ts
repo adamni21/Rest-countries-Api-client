@@ -3,7 +3,7 @@ export interface Country {
   nativeNames: string[];
   capitals: string[];
   languages: [string];
-  currencies: [string];
+  currencies: [{name: string, symbol: string}];
   region: string;
   subRegion?: string;
   population: number;
