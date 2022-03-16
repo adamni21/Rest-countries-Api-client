@@ -8,9 +8,10 @@ import c from "./CountryGrid.module.scss";
 
 interface Props {}
 
-/* TODO: 
+/* #TODO: 
   1) reduce "languages" and "currencies" from object to array;  
-  2) fetch svgUrl additionally 
+  2) fetch svgUrl additionally;
+  3) move reducer to context and feed raw data in setCountries;
   */
 
 // const dataReducer = (raw: any): [Country] => {

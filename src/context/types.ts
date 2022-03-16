@@ -7,7 +7,7 @@ export interface Country {
   region: string;
   subRegion?: string;
   population: number;
-  borders: [string];
+  borders?: [string];
   topLevelDomains: [string];
   flagUrl: string;
   cca3: string;
