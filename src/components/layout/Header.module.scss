@@ -1,4 +1,3 @@
-
 .header {
     display: flex;
     white-space: nowrap;
@@ -16,7 +15,7 @@
 }
 
 .switch {
-    margin-right: 1rem;
+    margin-right: 1em;
     font-size: 1.2rem;
     padding: .5rem;
     background-color: var(--accent-background);
@@ -30,5 +29,17 @@
 }
 
 .icon {
-    margin: 0 .4rem;
+    margin: 0 .4em;
+}
+
+@media screen and (max-width: 700px) {
+    .header {
+        padding: .3rem 3%;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    .switch{
+        font-size: .8rem;
+    }
 }
