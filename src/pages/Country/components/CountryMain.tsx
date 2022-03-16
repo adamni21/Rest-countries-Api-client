@@ -8,8 +8,9 @@ interface Props {}
 
 const CountryMain: FC<Props> = (props) => {
   const ctx = useContext(CountriesContext);
-  const country = ctx.countries.find((country) => country.name === "United States"); // gonna come from urlParams
-
+  const country = ctx.countries.find((country) => country.name === "Serbia"); // Sonna come from urlParams
+  const borders = country?.borders?.map(cca3 => ctx.countries.find(country => country.cca3 === cca3)!.name) as [string] | undefined
+  
   useEffect(() => {
     ctx.setCountries(JSON.parse(localStorage.getItem("countries")!));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,6 +34,7 @@ const CountryMain: FC<Props> = (props) => {
             topLevelDomains={country.topLevelDomains}
             currencies={country.currencies}
             languages={country.languages}
+            borders={borders}
           />
         </>
       )}

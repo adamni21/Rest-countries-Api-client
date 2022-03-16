@@ -10,13 +10,13 @@ interface Props {
   subRegion?: string;
   capitals: string[];
   topLevelDomains: [string];
-  currencies: [{name: string, symbol: string}];
+  currencies: [{ name: string; symbol: string }];
   languages: [string];
   borders?: [string];
 }
 
 const CountryInfoGrid: FC<Props> = (props) => {
-  const currencies = Object.values(props.currencies).map(cu => cu.name)
+  const currencies = Object.values(props.currencies).map((curr) => curr.name);
   return (
     <div className={c.infoGrid}>
       <h1 className={c.countryName}>{props.name}</h1>
@@ -32,7 +32,11 @@ const CountryInfoGrid: FC<Props> = (props) => {
         />
         <GridInfoRow label="Region" value={props.region} />
         <GridInfoRow label="Sub Region" value={props.subRegion} />
-        <GridInfoRow label="Capital" value={props.capitals[0]} hasOther={props.capitals.slice(1)}/>
+        <GridInfoRow
+          label="Capital"
+          value={props.capitals[0]}
+          hasOther={props.capitals.slice(1)}
+        />
       </div>
       <div className={c.info2}>
         <GridInfoRow
@@ -50,6 +54,15 @@ const CountryInfoGrid: FC<Props> = (props) => {
           hasOther={Object.values(props.languages).slice(1)}
         />
         <div className="infos"></div>
+      </div>
+      <div className={c.adjacent}>
+        <label>Border Countries:</label>
+        {props.borders ? props.borders?.map((name) => (
+          <span key={name}>
+            {/* replace with router links */}
+            {name}
+          </span>
+        )) : <p>has no shared Border</p>}
       </div>
     </div>
   );

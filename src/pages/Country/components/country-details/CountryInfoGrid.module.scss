@@ -1,19 +1,19 @@
 .infoGrid {
-    min-width: 30rem;
     width: fit-content;
-    max-width: 45rem;
+    max-width: 560px;
     flex: 1;
     text-align: left;
     color: var(--text);
 
     display: grid;
+    justify-self: center;
     justify-items: start;
     gap: .5rem 2%;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(15em,1fr));
     grid-template-areas:
-        "name name"
+        "name ."
         "info1 info2"
-        "border border";
+        "adjacent adjacent";
 }
 
 .countryName {
@@ -24,28 +24,68 @@
 }
 
 .info1 {
-    grid-area: "info1";
+    grid-area: info1;
 }
 
 .info2 {
-    grid-area: "info2";
+    grid-area: info2;
+}
+
+.adjacent {
+    grid-area: adjacent;
+    padding: .3rem .5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .5em;
+
+    &>label {
+        font-weight: 600;
+        text-align: left;
+        flex: 1;
+        white-space: nowrap;
+        margin-right: .5em;
+    }
+
+    &>span {
+        padding: .3em .5em;
+        text-align: center;
+        white-space: nowrap;
+        flex-grow: 1;
+        background: var(--background-brighter);
+        box-sizing: border-box;
+        max-width: 30%;
+        min-width: fit-content;
+        width: 6em;
+        box-shadow: 0 .1rem .5rem var(--shadow);
+        border-radius: 3px;
+    }
 }
 
 
 @media screen and (max-width: 700px) {
     .infoGrid {
         min-width: fit-content;
-        grid-template-columns: 100%;
         box-sizing: border-box;
-        justify-items: flex-start;
+        grid-template-columns: minmax(min-content, 80%);
+        justify-content: center;
         grid-template-areas:
             "name"
             "info1"
             "info2"
-            "border";
+            "adjacent";
 
     }
+
     .info2 {
         padding-top: 2rem;
+    }
+
+    .adjacent{
+        padding-top: 2rem;
+
+        &>span{
+            max-width: 60%;
+        }
     }
 }
