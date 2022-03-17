@@ -1,4 +1,5 @@
 import { FC, useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { CountriesContext } from "../../../context/countries-context";
 import CountryFlag from "./country-details/CountryFlag";
 import CountryInfoGrid from "./country-details/CountryInfoGrid";
@@ -8,9 +9,12 @@ interface Props {}
 
 const CountryMain: FC<Props> = (props) => {
   const ctx = useContext(CountriesContext);
-  const country = ctx.countries.find((country) => country.name === "Australia"); // Sonna come from urlParams
-  const borders = country?.borders?.map(cca3 => ctx.countries.find(country => country.cca3 === cca3)!.name) as [string] | undefined
-  
+  const { country: countryName } = useParams();
+  const country = ctx.countries.find((country) => country.name === countryName);
+  const borders = country?.borders?.map(
+    (cca3) => ctx.countries.find((country) => country.cca3 === cca3)!.name
+  ) as [string] | undefined;
+
   useEffect(() => {
     ctx.setCountries(JSON.parse(localStorage.getItem("countries")!));
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import c from "./App.module.scss";
 import Header from "./components/layout/Header";
@@ -13,10 +14,15 @@ function App() {
   };
 
   return (
-    <div className={c.App} data-theme={theme}>
-      <Header onSwitch={toggleThemeHandler} theme={theme}></Header>
-      <CountryPage/>
-    </div>
+    <BrowserRouter>
+      <div className={c.App} data-theme={theme}>
+        <Header onSwitch={toggleThemeHandler} theme={theme}></Header>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/:country" element={<CountryPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
