@@ -1,10 +1,12 @@
-import { FC, useContext, useEffect } from "react";
+import { FC, MouseEventHandler, useContext, useEffect } from "react";
 import { CountriesContext } from "../../../../context/countries-context";
 // import { Country } from "../../context/types";
 // import useHttp from "../../hooks/use-http";
 import CountryCard from "./CountryCard";
 
 import c from "./CountryGrid.module.scss";
+import foreignC from "./CountryCard.module.scss";
+import { useNavigate } from "react-router-dom";
 
 interface Props {}
 
@@ -51,6 +53,7 @@ const CountryGrid: FC<Props> = (props) => {
   //   "https://restcountries.com/v3.1/all",
   //   dataReducer
   // );
+  const navigate = useNavigate();
   const ctx = useContext(CountriesContext);
   /* ###DELETE### */
   useEffect(() => {
@@ -83,6 +86,17 @@ const CountryGrid: FC<Props> = (props) => {
   //     />
   //   ))
   // );
+  const gridClickHandler: MouseEventHandler = (e) => {
+    const targetElement = e.target as HTMLElement;
+    // click on a countryCard
+    if (targetElement.closest("." + foreignC["country-card"])) {
+      const countryName = targetElement
+        .closest("." + foreignC["country-card"])
+        ?.querySelector("div:nth-child(2) h2")?.textContent;
+        
+      navigate("/" + countryName?.replaceAll(" ", "_"));
+    }
+  };
 
   /* ###DELETE### */
   const content = ctx.filteredCountries.map((country) => (
@@ -97,7 +111,11 @@ const CountryGrid: FC<Props> = (props) => {
   ));
   /* ###/DELETE### */
 
-  return <div className={c["country-grid"]}>{content}</div>;
+  return (
+    <div className={c["country-grid"]} onClick={gridClickHandler}>
+      {content}
+    </div>
+  );
 };
 
 export default CountryGrid;
