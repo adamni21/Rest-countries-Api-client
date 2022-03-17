@@ -60,6 +60,10 @@
         box-shadow: 0 .1rem .5rem var(--shadow);
         border-radius: 3px;
     }
+
+    &>p{
+        margin-left: -.7em;
+    }
 }
 
 
