@@ -9,11 +9,14 @@ interface Props {}
 
 const CountryMain: FC<Props> = (props) => {
   const ctx = useContext(CountriesContext);
-  const { country: countryName } = useParams();
+  const params = useParams();
+  const countryName = params.country!.replaceAll(/\/%20|_/g, " ");
   const country = ctx.countries.find((country) => country.name === countryName);
   const borders = country?.borders?.map(
     (cca3) => ctx.countries.find((country) => country.cca3 === cca3)!.name
   ) as [string] | undefined;
+  
+  
 
   useEffect(() => {
     ctx.setCountries(JSON.parse(localStorage.getItem("countries")!));
