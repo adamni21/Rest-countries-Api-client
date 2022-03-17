@@ -5,10 +5,18 @@
     align-items: center;
     min-width: 20rem;
     border: 5px;
+    aspect-ratio: 1.5;
 }
 
 .flag {
     box-shadow: 0 .1rem .5rem var(--shadow);
     max-width: 90%;
     max-height: 90%;
+}
+
+@media screen and (max-width: 60rem) {
+    .flagContainer {
+        aspect-ratio: unset;
+        max-height: 450px;
+    }
 }

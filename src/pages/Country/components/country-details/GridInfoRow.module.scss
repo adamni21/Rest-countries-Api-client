@@ -1,5 +1,6 @@
 .wrapper {
     display: flex;
+    box-sizing: border-box;
     align-items: flex-start;
     flex-wrap: wrap;
     padding: .3rem .5rem;

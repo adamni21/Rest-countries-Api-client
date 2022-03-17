@@ -8,7 +8,7 @@ interface Props {}
 
 const CountryMain: FC<Props> = (props) => {
   const ctx = useContext(CountriesContext);
-  const country = ctx.countries.find((country) => country.name === "Serbia"); // Sonna come from urlParams
+  const country = ctx.countries.find((country) => country.name === "Australia"); // Sonna come from urlParams
   const borders = country?.borders?.map(cca3 => ctx.countries.find(country => country.cca3 === cca3)!.name) as [string] | undefined
   
   useEffect(() => {
@@ -20,7 +20,7 @@ const CountryMain: FC<Props> = (props) => {
   const svgUrl = country?.flagUrl.replaceAll(/\/w320|png/g, "") + "svg";
 
   return (
-    <div className={c.flexMain}>
+    <div className={c.main}>
       {country && (
         <>
           <CountryFlag flagUrl={svgUrl} countryName={country.name} />
