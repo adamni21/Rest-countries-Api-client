@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import c from "./CountryInfoGrid.module.scss";
 import GridInfoRow from "./GridInfoRow";
 
@@ -9,7 +10,7 @@ interface Props {
   region: string;
   subRegion?: string;
   capitals: string[];
-  topLevelDomains: [string];
+  topLevelDomains?: [string];
   currencies: [{ name: string; symbol: string }];
   languages: [string];
   borders?: [string];
@@ -17,6 +18,8 @@ interface Props {
 
 const CountryInfoGrid: FC<Props> = (props) => {
   const currencies = Object.values(props.currencies).map((curr) => curr.name);
+  const navigate = useNavigate();
+  
   return (
     <div className={c.infoGrid}>
       <h1 className={c.countryName}>{props.name}</h1>
@@ -41,7 +44,8 @@ const CountryInfoGrid: FC<Props> = (props) => {
       <div className={c.info2}>
         <GridInfoRow
           label="Top Level Domain"
-          value={props.topLevelDomains[0]}
+          value={props.topLevelDomains?.[0]}
+          hasOther={props.topLevelDomains?.slice(1)}
         />
         <GridInfoRow
           label="Currency"
@@ -55,14 +59,24 @@ const CountryInfoGrid: FC<Props> = (props) => {
         />
         <div className="infos"></div>
       </div>
-      <div className={c.adjacent}>
+      <div
+        className={c.adjacent}
+        onClick={(e) => {
+          if (e.target instanceof HTMLSpanElement)
+            navigate("/" + e.target.textContent?.replaceAll(" ", "_"));
+        }}
+      >
         <label>Border Countries:</label>
-        {props.borders ? props.borders?.map((name) => (
-          <span key={name}>
-            {/* replace with router links */}
-            {name}
-          </span>
-        )) : <p>has no shared Border</p>}
+        {props.borders ? (
+          props.borders?.map((name) => (
+            <span key={name}>
+              {/* replace with router links */}
+              {name}
+            </span>
+          ))
+        ) : (
+          <p>has no shared Border</p>
+        )}
       </div>
     </div>
   );
