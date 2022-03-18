@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes } from "react";
+import { FC } from "react";
 import c from "./CountryFlag.module.scss"
 
 interface Props {

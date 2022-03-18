@@ -4,7 +4,7 @@ import ToggleButton from "../UI/ToggleButton";
 import { faMoon, faLightbulb } from "@fortawesome/free-regular-svg-icons";
 
 import c from "./Header.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   onSwitch: () => void;
