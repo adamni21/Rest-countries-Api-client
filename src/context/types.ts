@@ -1,14 +1,14 @@
 export interface Country {
   name: string;
-  nativeNames: string[];
-  capitals: string[];
-  languages: [string];
-  currencies: [{name: string, symbol: string}];
+  nativeNames?: string[];
+  capitals?: string[];
+  languages: string[];
+  currencies: string[];
   region: string;
   subRegion?: string;
   population: number;
-  borders?: [string];
-  topLevelDomains: [string];
+  borders?: string[];
+  topLevelDomains?: string[];
   flagUrl: string;
   cca3: string;
 }
@@ -26,8 +26,8 @@ export type CountriesContextState = {
   countries: Country[];
   setCountries: (countries: [Country]) => void;
   filteredCountries: Country[];
-  searchValue: string,
-  setSearchValue: (searchValue: string) => void,
-  region: Region,
-  setRegion: (region: Region) => void,
+  searchValue: string;
+  setSearchValue: (searchValue: string) => void;
+  region: Region;
+  setRegion: (region: Region) => void;
 };
