@@ -39,7 +39,7 @@ const CountryMain: FC<Props> = (props) => {
             subRegion={country.subRegion}
             capitals={country.capitals}
             topLevelDomains={country.topLevelDomains}
-            currencies={country.currencies}
+            currencies={country.currencies as { name: string; symbol: string }[]} // remove type casting when not using local data anymore
             languages={country.languages}
             borders={borders}
           />
