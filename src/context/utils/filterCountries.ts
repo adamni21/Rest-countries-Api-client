@@ -10,7 +10,7 @@ export default function filterCountries(
   region: Region = Region.all,
   countries: Country[],
   returnRatings = false
-) {
+): Country[] | {country: Country, rating: number}[] {
   if (!countries.length) return [];
 
   const countriesInRegion =
@@ -84,7 +84,9 @@ export default function filterCountries(
       });
   }
 
+  // return sorted searchRatings
   if (returnRatings) searchRatings.sort((a, b) => b.rating - a.rating);
+
   // returns searchRatings sorted and mapped back to just countries
   return searchRatings
     .sort((a, b) => b.rating - a.rating)
