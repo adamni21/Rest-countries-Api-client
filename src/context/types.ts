@@ -3,7 +3,7 @@ export interface Country {
   nativeNames?: string[];
   capitals?: string[];
   languages: string[];
-  currencies: string[];
+  currencies: string[] | { name: string; symbol: string }[]; // remove " | { name: string; symbol: string }[]" when not using local data anymore
   region: string;
   subRegion?: string;
   population: number;

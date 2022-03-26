@@ -68,44 +68,45 @@ export const GetCountryData = (endpoint: Endpoint, params?: Params) => {
 // name: name.common,
 // nativeNames: nativeNames as string[],
 
+const fieldReducer = {
+  capitals: (
+    country: Partial<RawCountry>,
+    reducedCountry: Partial<Country>
+  ) => (reducedCountry.capitals = country.capitals),
+  languages: (
+    country: Partial<RawCountry>,
+    reducedCountry: Partial<Country>
+  ) => (reducedCountry.languages = country.languages),
+  cca3: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
+    (reducedCountry.cca3 = country.cca3),
+  borders: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
+    (reducedCountry.borders = country.borders),
+  currencies: (
+    country: Partial<RawCountry>,
+    reducedCountry: Partial<Country>
+  ) =>
+    (reducedCountry.currencies = country.currencies!.map(
+      (curr) => curr.name
+    )),
+  region: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
+    (reducedCountry.region = country.region),
+  subRegion: (
+    country: Partial<RawCountry>,
+    reducedCountry: Partial<Country>
+  ) => (reducedCountry.subRegion = country.subRegion),
+  population: (
+    country: Partial<RawCountry>,
+    reducedCountry: Partial<Country>
+  ) => (reducedCountry.population = country.population),
+  topLevelDomains: (
+    country: Partial<RawCountry>,
+    reducedCountry: Partial<Country>
+  ) => (reducedCountry.topLevelDomains = country.tld),
+  flagUrl: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
+    (reducedCountry.flagUrl = country.flags!.png),
+};
+
 export const CountryDataReducer = (raw: any) => {
-  const fieldReducer = {
-    capitals: (
-      country: Partial<RawCountry>,
-      reducedCountry: Partial<Country>
-    ) => (reducedCountry.capitals = country.capitals),
-    languages: (
-      country: Partial<RawCountry>,
-      reducedCountry: Partial<Country>
-    ) => (reducedCountry.languages = country.languages),
-    cca3: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
-      (reducedCountry.cca3 = country.cca3),
-    borders: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
-      (reducedCountry.borders = country.borders),
-    currencies: (
-      country: Partial<RawCountry>,
-      reducedCountry: Partial<Country>
-    ) =>
-      (reducedCountry.currencies = country.currencies!.map(
-        (curr) => curr.name
-      )),
-    region: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
-      (reducedCountry.region = country.region),
-    subRegion: (
-      country: Partial<RawCountry>,
-      reducedCountry: Partial<Country>
-    ) => (reducedCountry.subRegion = country.subRegion),
-    population: (
-      country: Partial<RawCountry>,
-      reducedCountry: Partial<Country>
-    ) => (reducedCountry.population = country.population),
-    topLevelDomains: (
-      country: Partial<RawCountry>,
-      reducedCountry: Partial<Country>
-    ) => (reducedCountry.topLevelDomains = country.tld),
-    flagUrl: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
-      (reducedCountry.flagUrl = country.flags!.png),
-  };
 
   return raw.map((country: Partial<RawCountry>): Partial<Country> => {
     const reducedCountry: Partial<Country> = {};

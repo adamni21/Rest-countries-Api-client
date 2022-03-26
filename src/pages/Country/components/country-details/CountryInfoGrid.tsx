@@ -5,29 +5,31 @@ import GridInfoRow from "./GridInfoRow";
 
 interface Props {
   name: string;
-  nativeNames: string[];
+  nativeNames?: string[];
   population: number;
   region: string;
   subRegion?: string;
-  capitals: string[];
-  topLevelDomains?: [string];
-  currencies: [{ name: string; symbol: string }];
-  languages: [string];
-  borders?: [string];
+  capitals?: string[];
+  topLevelDomains?: string[];
+  currencies?: { name: string; symbol: string }[];
+  languages: string[];
+  borders?: string[];
 }
 
 const CountryInfoGrid: FC<Props> = (props) => {
-  const currencies = Object.values(props.currencies).map((curr) => curr.name);
+  const currencies = Object.values(
+    props.currencies as { name: string; symbol: string }[]
+  ).map((curr) => curr.name); // remove when not using local data anymore
   const navigate = useNavigate();
-  
+
   return (
     <div className={c.infoGrid}>
       <h1 className={c.countryName}>{props.name}</h1>
       <div className={c.info1}>
         <GridInfoRow
           label="Native Name"
-          value={props.nativeNames[0]}
-          hasOther={props.nativeNames.slice(1)}
+          value={props.nativeNames?.[0]}
+          hasOther={props.nativeNames?.slice(1)}
         />
         <GridInfoRow
           label="Population"
@@ -37,8 +39,8 @@ const CountryInfoGrid: FC<Props> = (props) => {
         <GridInfoRow label="Sub Region" value={props.subRegion} />
         <GridInfoRow
           label="Capital"
-          value={props.capitals[0]}
-          hasOther={props.capitals.slice(1)}
+          value={props.capitals![0]}
+          hasOther={props.capitals!.slice(1)}
         />
       </div>
       <div className={c.info2}>
