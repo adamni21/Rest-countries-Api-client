@@ -5,12 +5,25 @@ import { Country, Region } from "../types";
 
 import middleNameMatches from "./middleNameMatches";
 
-export default function filterCountries(
+function filterCountries(
   searchValue: string,
-  region: Region = Region.all,
+  region: Region,
   countries: Country[],
-  returnRatings = false
-): Country[] | {country: Country, rating: number}[] {
+  returnWithRatings?: false
+): Country[];
+function filterCountries(
+  searchValue: string,
+  region: Region,
+  countries: Country[],
+  returnWithRatings: true
+): { country: Country; rating: number }[];
+
+function filterCountries(
+  searchValue: string,
+  region: Region,
+  countries: Country[],
+  returnWithRatings = false
+) {
   if (!countries.length) return [];
 
   const countriesInRegion =
@@ -20,7 +33,9 @@ export default function filterCountries(
         countries.filter((country) => country.region.startsWith(region));
 
   // "searchValue" is empty, skips search
-  if (!searchValue) return countriesInRegion;
+  if (!searchValue && returnWithRatings)
+    return countriesInRegion.map((country) => ({ country, rating: 0 }));
+  else if (!searchValue) return countriesInRegion;
 
   const searchRatings: { country: Country; rating: number }[] = [];
   const lowerCaseSearchValue = searchValue.toLowerCase();
@@ -85,10 +100,12 @@ export default function filterCountries(
   }
 
   // return sorted searchRatings
-  if (returnRatings) searchRatings.sort((a, b) => b.rating - a.rating);
+  if (returnWithRatings) searchRatings.sort((a, b) => b.rating - a.rating);
 
   // returns searchRatings sorted and mapped back to just countries
   return searchRatings
     .sort((a, b) => b.rating - a.rating)
     .map((country) => country.country);
 }
+
+export default filterCountries;
