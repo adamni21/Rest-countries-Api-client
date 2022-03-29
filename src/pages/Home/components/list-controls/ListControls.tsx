@@ -9,9 +9,9 @@ import { Region } from "../../../../context/types";
 interface Props {}
 
 const ListControls: FC<Props> = (props) => {
-  const [searchValue, setSearchValue] = useState("");
-  const [region, setRegion] = useState<Region>(Region.all);
   const ctx = useContext(CountriesContext);
+  const [searchValue, setSearchValue] = useState(ctx.searchValue);
+  const [region, setRegion] = useState<Region>(ctx.region);
   const searchValueChangeHandler = (e: FormEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
     ctx.setSearchValue(e.currentTarget.value);

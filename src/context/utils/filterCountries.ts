@@ -100,7 +100,7 @@ function filterCountries(
   }
 
   // return sorted searchRatings
-  if (returnWithRatings) searchRatings.sort((a, b) => b.rating - a.rating);
+  if (returnWithRatings) return searchRatings.sort((a, b) => b.rating - a.rating);
 
   // returns searchRatings sorted and mapped back to just countries
   return searchRatings
