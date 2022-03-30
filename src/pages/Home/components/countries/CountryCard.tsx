@@ -27,7 +27,7 @@ const CountryCard: FC<Props> = ({
         <h2>{name}</h2>
         <p>
           <span>Population: </span>
-          {population.toLocaleString()}
+          {population}
         </p>
         <p>
           <span>Region: </span>

@@ -9,7 +9,7 @@ export interface Country {
   population: number;
   borders?: string[];
   topLevelDomains?: string[];
-  flagUrl: string;
+  flagUrl: {png: string, svg: string};
   cca3: string;
 }
 

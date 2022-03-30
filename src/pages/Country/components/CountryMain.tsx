@@ -24,7 +24,7 @@ const CountryMain: FC<Props> = (props) => {
   }, []);
 
   // TODO: fetch svgurl from api, when not using local data anymore
-  const svgUrl = country?.flagUrl.replaceAll(/\/w320|png/g, "") + "svg";
+  const svgUrl = country!.flagUrl.svg;
 
   return (
     <div className={c.main}>

@@ -1,32 +1,36 @@
+import { ApiBaseUrl } from "../constants";
 import { Country } from "../context/types";
 
-interface RawCountry
-  extends Omit<
-    Country,
-    "name" | "currencies" | "topLevelDomains" | "flagUrl" | "nativeNames"
-  > {
+interface RawCountry {
   name: {
     official: string;
     common: string;
     nativeName: { [key: string]: { official: string; common: string } };
   };
-  currencies?: { name: string; symbol: string }[];
+  capital?: string[];
+  languages: { [key: string]: string };
+  currencies: { name: string; symbol: string }[];
+  region: string;
+  subregion?: string;
+  population: number;
+  borders?: string[];
   tld?: string[];
-  flags?: { png: string; svg: string };
+  flags: { png: string; svg: string };
+  cca3: string;
 }
 
 type ApiField = keyof RawCountry;
 
-const allApiFields: Omit<ApiField, "name">[] = [
-  "capitals",
+const allApiFields = [
+  "capital",
   "languages",
   "currencies",
   "region",
-  "subRegion",
+  "subregion",
   "population",
   "borders",
   "tld",
-  "flagUrl",
+  "flags",
   "cca3",
 ];
 
@@ -38,10 +42,10 @@ interface Params {
 }
 
 export const GetCountryData = (endpoint: Endpoint, params?: Params) => {
-  let url = "https://restcountries.com/v3.1/" + endpoint + "?fields=name,";
+  let url = ApiBaseUrl + endpoint + "?fields=name,";
 
   if (params?.fields) url += params.fields.join(",");
-  else allApiFields.join(",");
+  else url += allApiFields.join(",");
 
   if (endpoint !== "alpha") delete params?.codes;
   else if (!params?.codes)
@@ -51,80 +55,53 @@ export const GetCountryData = (endpoint: Endpoint, params?: Params) => {
   return url;
 };
 
-// const CountryDataReducer = (raw: any): Partial<Country>[] => {
-//   return raw.map((country: any): Country => {
-//     const nativeNames = country.name.nativeName
-//       ? Object.values<{ common: string; official: string }>(
-//           country.name.nativeName
-//         ).map((name) => name.common)
-//       : undefined;
-//     const reducedCountry = {
-//       name: country.name.common,
-//       nativeNames: nativeNames as string[]
-//     }
-//     return reducedCountry;
-//   });
-// };
-// name: name.common,
-// nativeNames: nativeNames as string[],
+type FieldReducer = (rawCountry: Partial<RawCountry>) => any;
 
-const fieldReducer = {
-  capitals: (
-    country: Partial<RawCountry>,
-    reducedCountry: Partial<Country>
-  ) => (reducedCountry.capitals = country.capitals),
-  languages: (
-    country: Partial<RawCountry>,
-    reducedCountry: Partial<Country>
-  ) => (reducedCountry.languages = country.languages),
-  cca3: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
-    (reducedCountry.cca3 = country.cca3),
-  borders: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
-    (reducedCountry.borders = country.borders),
-  currencies: (
-    country: Partial<RawCountry>,
-    reducedCountry: Partial<Country>
-  ) =>
-    (reducedCountry.currencies = country.currencies!.map(
-      (curr) => curr.name
-    )),
-  region: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
-    (reducedCountry.region = country.region),
-  subRegion: (
-    country: Partial<RawCountry>,
-    reducedCountry: Partial<Country>
-  ) => (reducedCountry.subRegion = country.subRegion),
-  population: (
-    country: Partial<RawCountry>,
-    reducedCountry: Partial<Country>
-  ) => (reducedCountry.population = country.population),
-  topLevelDomains: (
-    country: Partial<RawCountry>,
-    reducedCountry: Partial<Country>
-  ) => (reducedCountry.topLevelDomains = country.tld),
-  flagUrl: (country: Partial<RawCountry>, reducedCountry: Partial<Country>) =>
-    (reducedCountry.flagUrl = country.flags!.png),
+const fieldReducer: { [key: string]: FieldReducer } = {
+  capitals: (rawCountry) => rawCountry.capital,
+  languages: (rawCountry) => (Object as any).values(rawCountry.languages),
+  cca3: (rawCountry) => rawCountry.cca3,
+  borders: (rawCountry) => rawCountry.borders,
+  currencies: (rawCountry) =>
+    (Object as any)
+      .values(rawCountry.currencies)
+      .map((curr: { name: string }) => curr.name),
+  region: (rawCountry) => rawCountry.region,
+  subRegion: (rawCountry) => rawCountry.subregion,
+  population: (rawCountry) => rawCountry.population,
+  topLevelDomains: (rawCountry) => rawCountry.tld,
+  flagUrl: (rawCountry) => rawCountry.flags,
 };
 
-export const CountryDataReducer = (raw: any) => {
+/* #TODO: 
+  1) reduce "languages" and "currencies" from object to array;  
+  2) fetch svgUrl additionally;
+/* /TODO */
+export const countryDataReducer = (raw: any) => {
+  const reducer = { ...fieldReducer };
+  // delete not needed reducerFields
+  Object.keys(fieldReducer).forEach((field) => {
+    if (!fieldReducer[field](raw[0])) delete fieldReducer[field];
+  });
 
-  return raw.map((country: Partial<RawCountry>): Partial<Country> => {
+  return raw.map((rawCountry: Partial<RawCountry>): Partial<Country> => {
     const reducedCountry: Partial<Country> = {};
+
     // add name and distinct native name(s), since name is acting as id
-    reducedCountry.name = country.name?.common;
-    reducedCountry.nativeNames = country.name?.nativeName
-      ? Object.values<{ common: string }>(country.name.nativeName)
+    reducedCountry.name = rawCountry.name?.common;
+    reducedCountry.nativeNames = rawCountry.name?.nativeName
+      ? Object.values<{ common: string }>(rawCountry.name.nativeName)
           .map((name) => name.common)
-          .reduce((a: string[], b) => (a.includes(b) ? a : [...a]), [])
+          .reduce((a: string[], b) => (a.includes(b) ? a : [...a, b]), [])
       : undefined;
 
-    //convert rawCountry to contextCountry
-    Object.keys(country).forEach((field) =>
-      fieldReducer[field as unknown as keyof typeof fieldReducer](
-        country,
-        reducedCountry
-      )
+    // add all fields to reducedCountry
+    Object.keys(reducer).forEach(
+      (field) =>
+        (reducedCountry[field as unknown as keyof Country] =
+          reducer[field](rawCountry))
     );
+
     return reducedCountry;
   });
 };
