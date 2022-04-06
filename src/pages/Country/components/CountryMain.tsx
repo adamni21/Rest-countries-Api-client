@@ -1,36 +1,43 @@
-import { FC, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { FC, useContext, useEffect, useState } from "react";
 import { CountriesContext } from "../../../context/countries-context";
+import { Country } from "../../../context/types";
 import CountryFlag from "./country-details/CountryFlag";
 import CountryInfoGrid from "./country-details/CountryInfoGrid";
 import c from "./CountryMain.module.scss";
 
-interface Props {}
+interface Props {
+  country: Country;
+}
 
-const CountryMain: FC<Props> = (props) => {
+const CountryMain: FC<Props> = ({ country }) => {
   const ctx = useContext(CountriesContext);
-  const params = useParams();
-  const countryName = params.country!.replaceAll(/\/%20|_/g, " ");
-  const country = ctx.countries.find((country) => country.name === countryName);
-  const borders = country?.borders?.map(
-    (cca3) => ctx.countries.find((country) => country.cca3 === cca3)!.name
-  ) as [string] | undefined;
-  
-  
+  const [borders, setBorders] = useState<string[]>([]);
 
+  // set borders when fetched
   useEffect(() => {
-    ctx.setCountries(JSON.parse(localStorage.getItem("countries")!));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const tempBorders: string[] = [];
 
-  // TODO: fetch svgurl from api, when not using local data anymore
-  const svgUrl = country!.flagUrl.svg;
+    // checking wether missing an neighbouring country while pushing to tempBorders
+    const allPresent = country.borders?.every((cca3) => {
+      const result = ctx.countries.find((country) => country.cca3 === cca3);
+      // if country was found push name
+      if (result) return tempBorders.push(result.name);
+      // country is missing
+      else return false;
+    });
+
+    if (allPresent) setBorders(tempBorders);
+    else setBorders(["one moment, already going along the border..."]);
+  }, [ctx.countries, country]);
 
   return (
     <div className={c.main}>
       {country && (
         <>
-          <CountryFlag flagUrl={svgUrl} countryName={country.name} />
+          <CountryFlag
+            flagUrl={country.flagUrl.svg}
+            countryName={country.name}
+          />
           <CountryInfoGrid
             name={country.name}
             nativeNames={country.nativeNames}
@@ -39,7 +46,7 @@ const CountryMain: FC<Props> = (props) => {
             subRegion={country.subRegion}
             capitals={country.capitals}
             topLevelDomains={country.topLevelDomains}
-            currencies={country.currencies as { name: string; symbol: string }[]} // remove type casting when not using local data anymore
+            currencies={country.currencies}
             languages={country.languages}
             borders={borders}
           />

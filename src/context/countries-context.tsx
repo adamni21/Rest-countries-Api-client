@@ -21,9 +21,7 @@ const CountriesProvider: FC = ({ children }) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [region, setRegion] = useState<Region>(Region.all);
   useEffect(() => {
-    console.time();
     setFilteredCountries(filterCountries(searchValue, region, countries));
-    console.timeEnd();
   }, [countries, searchValue, region]);
 
   return (

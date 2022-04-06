@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 interface RequestError {
   status: number;
@@ -10,35 +10,31 @@ const useHttp = <T>(dataReducer?: (rawData: any) => T) => {
 
   const [data, setData] = useState<Data>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<null | RequestError | Error>(null);
+  const [error, setError] = useState<null | RequestError>(null);
 
-  const request = async (Url: string, init?: RequestInit) => {
+  const request = useCallback( async (Url: string, init?: RequestInit) => {
+    if(isLoading) {
+      throw new Error("wait until current request is done")
+    }
     setData(null);
     setIsLoading(true);
     setError(null);
-    try {
+
     const response = await fetch(Url, init);
     if (!response.ok) {
       setError({ status: response.status, statusText: response.statusText });
       setIsLoading(false);
       return;
     }
-    
+
     const data = dataReducer
-      ? dataReducer((await response.json()))
-      : (await response.json());
+      ? dataReducer(await response.json())
+      : await response.json();
     setData(data);
     setIsLoading(false);
-      
-    } catch (error) {
-      console.log(error);
-      
-      setError(error as Error)
-      setIsLoading(false)
-    }
-  };
+  }, [dataReducer, isLoading])
 
-  return {data, isLoading, error, request}
+  return { data, isLoading, error, request };
 };
 
 export default useHttp;

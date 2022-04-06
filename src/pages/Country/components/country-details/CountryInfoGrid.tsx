@@ -11,15 +11,12 @@ interface Props {
   subRegion?: string;
   capitals?: string[];
   topLevelDomains?: string[];
-  currencies?: { name: string; symbol: string }[];
+  currencies?: string[];
   languages: string[];
   borders?: string[];
 }
 
 const CountryInfoGrid: FC<Props> = (props) => {
-  const currencies = Object.values(
-    props.currencies as { name: string; symbol: string }[]
-  ).map((curr) => curr.name); // remove when not using local data anymore
   const navigate = useNavigate();
 
   return (
@@ -51,8 +48,8 @@ const CountryInfoGrid: FC<Props> = (props) => {
         />
         <GridInfoRow
           label="Currency"
-          value={currencies[0]}
-          hasOther={currencies.slice(1)}
+          value={props.currencies?.[0]}
+          hasOther={props.currencies?.slice(1)}
         />
         <GridInfoRow
           label="Language"
@@ -69,7 +66,7 @@ const CountryInfoGrid: FC<Props> = (props) => {
         }}
       >
         <label>Border Countries:</label>
-        {props.borders ? (
+        {props.borders?.length ? (
           props.borders?.map((name) => (
             <span key={name}>
               {/* replace with router links */}

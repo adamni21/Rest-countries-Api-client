@@ -3,7 +3,7 @@ export interface Country {
   nativeNames?: string[];
   capitals?: string[];
   languages: string[];
-  currencies: string[] | { name: string; symbol: string }[]; // remove " | { name: string; symbol: string }[]" when not using local data anymore
+  currencies: string[];
   region: string;
   subRegion?: string;
   population: number;
@@ -24,7 +24,7 @@ export enum Region {
 
 export type CountriesContextState = {
   countries: Country[];
-  setCountries: (countries: [Country]) => void;
+  setCountries: (countries: Country[]) => void;
   filteredCountries: Country[];
   searchValue: string;
   setSearchValue: (searchValue: string) => void;

@@ -34,16 +34,18 @@ const allApiFields = [
   "cca3",
 ];
 
-type Endpoint = "all" | "alpha";
+type Endpoint = "all" | "alpha" | "name";
 
 interface Params {
+  subRoute?: string;
   fields?: ApiField[];
   codes?: string[];
 }
 
 export const GetCountryData = (endpoint: Endpoint, params?: Params) => {
-  let url = ApiBaseUrl + endpoint + "?fields=name,";
-
+  let url = ApiBaseUrl + endpoint;
+  url += params?.subRoute ? "/" + params?.subRoute : "";
+  url += "?fields=name,";
   if (params?.fields) url += params.fields.join(",");
   else url += allApiFields.join(",");
 

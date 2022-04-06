@@ -1,27 +1,33 @@
 import { FC, MouseEventHandler, useContext, useEffect } from "react";
 import { CountriesContext } from "../../../../context/countries-context";
-// import { Country } from "../../context/types";
-// import useHttp from "../../hooks/use-http";
+import useHttp from "../../../../hooks/use-http";
 import CountryCard from "./CountryCard";
 
 import c from "./CountryGrid.module.scss";
 import foreignC from "./CountryCard.module.scss";
 import { useNavigate } from "react-router-dom";
-import { countryDataReducer, GetCountryData } from "../../../../queries/GetCountryData";
-import useHttp from "../../../../hooks/use-http";
+import {
+  countryDataReducer,
+  GetCountryData,
+} from "../../../../queries/GetCountryData";
 
 interface Props {}
 
-
-
 const CountryGrid: FC<Props> = (props) => {
-  const { data: countries, error, isLoading, request } = useHttp(countryDataReducer);
+  const {
+    data: countries,
+    error,
+    isLoading,
+    request,
+  } = useHttp(countryDataReducer);
   const navigate = useNavigate();
   const ctx = useContext(CountriesContext);
+  
   useEffect(() => {
-    request(GetCountryData("all"));
+    if (!(ctx.countries.length >= 250)) request(GetCountryData("all"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   useEffect(() => {
     if (countries) ctx.setCountries(countries);
   }, [countries, ctx]);
@@ -31,7 +37,7 @@ const CountryGrid: FC<Props> = (props) => {
   ) : error ? (
     <h2>something went wrong.</h2>
   ) : (
-    ctx.countries.map((country) => (
+    ctx.filteredCountries.map((country) => (
       <CountryCard
         key={country.name}
         name={country.name}
