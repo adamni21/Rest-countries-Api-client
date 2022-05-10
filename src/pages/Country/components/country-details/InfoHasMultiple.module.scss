@@ -1,0 +1,41 @@
+
+.tooltip {
+    position: relative;
+
+
+    &::before {
+        content: attr(data-other);
+        background-color: var(--secondary);
+        border-radius: 5px;
+        display: none;
+        padding: .5em;
+        margin-bottom: .3em;
+        height: fit-content;
+        position: absolute;
+        bottom: 100%;
+        width: 250%;
+        text-align: center;
+        right: -.3rem;
+        white-space: normal;
+    }
+    
+    &::after {
+        content: "";
+        display: none;
+        position: absolute;
+        bottom: calc(100% - .7em);
+        left: 50%;
+        transform: translateX(-50%);
+        border: solid 8px #0000;
+        border-top: solid 8px var(--secondary);
+    }
+
+    &:hover::before,
+    &:hover::after {
+        display: block;
+    }
+}
+
+.dotted {
+    border-bottom: dotted var(--text) 1px;
+}

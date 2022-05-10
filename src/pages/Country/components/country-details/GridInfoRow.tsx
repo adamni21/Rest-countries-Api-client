@@ -1,5 +1,6 @@
 import { FC } from "react";
 import c from "./GridInfoRow.module.scss";
+import InfoHasMultiple from "./InfoHasMultiple";
 
 interface Props {
   label: string;
@@ -8,18 +9,8 @@ interface Props {
 }
 
 const GridInfoRow: FC<Props> = (props) => {
-  const hasOther = props.hasOther?.length ? (
-    <span
-      className={c.tooltip}
-      data-other={
-        props.hasOther.slice(0, -1).join(", ") +
-        " and " +
-        props.hasOther.slice(-1)
-      }
-    >
-      , <span className={c.dotted}>and other</span>
-    </span>
-  ) : undefined;
+  
+  
   return (
     <div className={c.wrapper}>
       <label className={c.label}>
@@ -33,7 +24,7 @@ const GridInfoRow: FC<Props> = (props) => {
       </label>
       <p className={c.value}>
         {props.value ? props.value : "has no " + props.label}
-        {hasOther}
+        <InfoHasMultiple additional={props.hasOther} />
       </p>
     </div>
   );
