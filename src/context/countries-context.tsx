@@ -1,4 +1,5 @@
 import { createContext, FC, useEffect, useState } from "react";
+import useSessiosStorage from "../hooks/use-sessionStorage";
 import { CountriesContextState, Country, Region } from "./types";
 import filterCountries from "./utils/filterCountries";
 
@@ -16,7 +17,7 @@ const countriesContextDefault: CountriesContextState = {
 export const CountriesContext = createContext(countriesContextDefault);
 
 const CountriesProvider: FC = ({ children }) => {
-  const [countries, setCountries] = useState<Country[]>([]);
+  const [countries, setCountries] = useSessiosStorage<Country[]>("countries", []);
   const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
   const [region, setRegion] = useState<Region>(Region.all);
