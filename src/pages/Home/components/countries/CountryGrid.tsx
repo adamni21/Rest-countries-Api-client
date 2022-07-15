@@ -22,7 +22,7 @@ const CountryGrid: FC<Props> = (props) => {
   } = useHttp(countryDataReducer);
   const navigate = useNavigate();
   const ctx = useContext(CountriesContext);
-  
+
   useEffect(() => {
     if (!(ctx.countries.length >= 250)) request(GetCountryData("all"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,7 +56,7 @@ const CountryGrid: FC<Props> = (props) => {
         .closest("." + foreignC["country-card"])
         ?.querySelector("div:nth-child(2) h2")?.textContent;
 
-      navigate("/" + countryName?.replaceAll(" ", "_"));
+      navigate("./" + countryName?.replaceAll(" ", "_"));
     }
   };
 

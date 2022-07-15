@@ -47,7 +47,7 @@ const CountryPage: FC<Props> = (props) => {
   // redirect to correct url format
   useEffect(() => {
     // replace " " I.e. "%20" with "_" if necessary
-    if (params.country!.includes(" ")) navigate("../" + urlCountryName);
+    if (params.country!.includes(" ")) navigate("./../" + urlCountryName);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -84,7 +84,7 @@ const CountryPage: FC<Props> = (props) => {
     if (error?.status === 404) {
       ctx.setSearchValue(apiCountryName);
       ctx.setRegion(Region.all);
-      navigate("../", { replace: true });
+      navigate("./..", { replace: true });
     }
     if (responseData) {
       // handling search response
@@ -93,12 +93,12 @@ const CountryPage: FC<Props> = (props) => {
         if (responseData.length > 1) {
           ctx.setSearchValue(apiCountryName);
           ctx.setRegion(Region.all);
-          navigate("../", { replace: true });
+          navigate("./..", { replace: true });
         }
         // found a single country, redirect to appropriate url
         else {
           ctx.setCountries(responseData);
-          navigate("../" + responseData[0].name.replaceAll(" ", "_"), {
+          navigate("./../" + responseData[0].name.replaceAll(" ", "_"), {
             replace: true,
           });
         }
@@ -125,7 +125,7 @@ const CountryPage: FC<Props> = (props) => {
     return <h2>Looking for country with that name...</h2>;
   return (
     <main className={c.main}>
-      <BackButton onClick={() => navigate("../")} />
+      <BackButton onClick={() => navigate("./..")} />
       <CountryMain country={currentCountry!} />
     </main>
   );
