@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useContext, useEffect, useState } from "react";
 import { CountriesContext } from "../../../context/countries-context";
 import { Country } from "../../../context/types";
 import CountryFlag from "./country-details/CountryFlag";
@@ -12,6 +12,14 @@ interface Props {
 const CountryMain: FC<Props> = ({ country }) => {
   const ctx = useContext(CountriesContext);
   const [borders, setBorders] = useState<string[]>([]);
+  const [hideImage, setHideImage] = useState(true);
+
+  const imageLoadedHandler = (e: SyntheticEvent) =>
+    setHideImage(!(e.target as HTMLImageElement).complete);
+
+  console.log(hideImage);
+
+  useEffect(() => setHideImage(true), [country]);
 
   // set borders when fetched
   useEffect(() => {
@@ -35,6 +43,8 @@ const CountryMain: FC<Props> = ({ country }) => {
       {country && (
         <>
           <CountryFlag
+            hideImg={hideImage}
+            onLoad={imageLoadedHandler}
             flagUrl={country.flagUrl.svg}
             countryName={country.name}
           />
