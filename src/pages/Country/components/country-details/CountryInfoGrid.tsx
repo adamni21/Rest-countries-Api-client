@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, MouseEventHandler } from "react";
 import { useNavigate } from "react-router-dom";
 import c from "./CountryInfoGrid.module.scss";
 import GridInfoRow from "./GridInfoRow";
@@ -18,6 +18,10 @@ interface Props {
 
 const CountryInfoGrid: FC<Props> = (props) => {
   const navigate = useNavigate();
+  const borderCountryClickHandler: MouseEventHandler = (e) => {
+    if (e.target instanceof HTMLSpanElement)
+      navigate("./../" + e.target.textContent?.replaceAll(" ", "_"));
+  };
 
   return (
     <div className={c.infoGrid}>
@@ -58,13 +62,7 @@ const CountryInfoGrid: FC<Props> = (props) => {
         />
         <div className="infos"></div>
       </div>
-      <div
-        className={c.adjacent}
-        onClick={(e) => {
-          if (e.target instanceof HTMLSpanElement)
-            navigate("/" + e.target.textContent?.replaceAll(" ", "_"));
-        }}
-      >
+      <div className={c.adjacent} onClick={borderCountryClickHandler}>
         <label>Border Countries:</label>
         {props.borders?.length ? (
           props.borders?.map((name) => (

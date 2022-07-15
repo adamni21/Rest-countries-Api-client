@@ -13,7 +13,7 @@ interface Props {
 
 const Header: FC<Props> = (props) => {
   const navigate = useNavigate();
-  const navigateHome = () => navigate("/");
+  const navigateHome = () => navigate("./Rest-countries-Api-client");
   return (
     <header className={c.header}>
       <h1 onClick={navigateHome}>Where in the World?</h1>

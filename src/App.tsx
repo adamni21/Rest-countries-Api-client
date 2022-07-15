@@ -18,9 +18,11 @@ function App() {
       <div className={c.App} data-theme={theme}>
         <Header onSwitch={toggleThemeHandler} theme={theme}></Header>
         <Routes>
-          <Route path="Rest-countries-Api-client" element={<Home />}>
-            <Route path="/:country" element={<CountryPage />} />
-          </Route>
+          <Route path="Rest-countries-Api-client" element={<Home />} />
+          <Route
+            path="Rest-countries-Api-client/:country"
+            element={<CountryPage />}
+          />
         </Routes>
       </div>
     </BrowserRouter>
